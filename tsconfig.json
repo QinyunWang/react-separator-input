@@ -10,7 +10,7 @@
     "skipLibCheck": true,
     "declaration": true,
     "paths": {
-      "react-separator-input": ["src/index.ts"]
+      "react-separator-input": ["./src/index.ts"]
     }
   }
 }
