@@ -14,7 +14,7 @@ export const escapeVariable = (value: string): string => {
   return value.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&')
 }
 
-export const removeFormat = (value: any, decimalSeparator: Exclude<Separator, ' '>) => {
+export const removeFormat = (value: any, decimalSeparator: Exclude<Separator, ' '>): string => {
   const regex = new RegExp(`[^0-9${escapeVariable(decimalSeparator)}]|^${escapeVariable(decimalSeparator)}$`, 'g')
   const valueWithoutInvalidInput = value?.toString().replace(regex, '') || ''
   return valueWithoutInvalidInput.replace(new RegExp(`${escapeVariable(decimalSeparator)}`, 'g'), ((i) => (match: string) => !i++ ? match : '')(0))

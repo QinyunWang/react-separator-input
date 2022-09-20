@@ -1,7 +1,9 @@
 import '@testing-library/jest-dom'
 import React from 'react'
-import { render, screen } from '@testing-library/react'
+import { fireEvent, render, screen } from '@testing-library/react'
 import SeparatorInput from '../../src'
+import { UserEvent } from '@testing-library/user-event/setup/setup'
+import userEvent from '@testing-library/user-event'
 
 describe('Separator Input', () => {
   describe('value prop', () => {
@@ -38,6 +40,64 @@ describe('Separator Input', () => {
     it('should render space thousand separator given 1000', () => {
       render(<SeparatorInput value={'1000'} thousandSeparator=" " />)
       expect(screen.getByRole('textbox')).toHaveValue('1 000')
+    })
+
+    it('should truncate the decimal value exceed the precision', () => {
+      render(<SeparatorInput value={1000.12} precision={1} />)
+      expect(screen.getByRole('textbox')).toHaveValue('1000.1')
+    })
+  })
+
+  describe('real time input convert', () => {
+    let user: UserEvent
+    beforeAll(() => {
+      user = userEvent.setup()
+    })
+
+    it('should add comma thousand separator during input', async () => {
+      render(<SeparatorInput thousandSeparator="," />)
+      const element = screen.getByRole('textbox')
+
+      await user.click(element)
+      await user.keyboard('1000')
+      expect(element).toHaveValue('1,000')
+
+      await user.keyboard('.')
+      expect(element).toHaveValue('1,000.')
+
+      fireEvent.blur(element)
+      expect(element).toHaveValue('1,000')
+
+      await user.click(element)
+      await user.keyboard('{Backspace}')
+      expect(element).toHaveValue('100')
+    })
+
+    it('should add period thousand separator during input', async () => {
+      render(<SeparatorInput thousandSeparator="." decimalSeparator="," />)
+      const element = screen.getByRole('textbox')
+
+      await user.click(element)
+      await user.keyboard('1000000')
+      expect(element).toHaveValue('1.000.000')
+
+      await user.keyboard(',102345')
+      expect(element).toHaveValue('1.000.000,102345')
+    })
+
+    it('should not accept input when out of range of precision', async () => {
+      render(<SeparatorInput thousandSeparator="," precision={1} />)
+      const element = screen.getByRole('textbox')
+
+      await user.click(element)
+      await user.keyboard('1234.1')
+      expect(element).toHaveValue('1,234.1')
+
+      await user.keyboard('666')
+      expect(element).toHaveValue('1,234.1')
+
+      await user.keyboard('{ArrowLeft}{ArrowLeft}{ArrowLeft}{ArrowLeft}.')
+      expect(element).toHaveValue('12.3')
     })
   })
 })
