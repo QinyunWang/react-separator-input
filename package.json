@@ -51,6 +51,7 @@
     "lint-staged": "^10.0.7",
     "material-ui": "^0.20.2",
     "prettier": "^2.2.1",
+    "react-dom": "^18.2.0",
     "typescript": "*",
     "yorkie": "^2.0.0"
   }

@@ -70,8 +70,8 @@ const withSeparator = <P extends object>(Component: React.ComponentType<P> | 'in
     precision,
     decimalSeparator = '.',
     thousandSeparator = '',
-    placeholder,
-    onValueChange = noop
+    onValueChange = noop,
+    ...otherProps
   } = props
 
   const [formattedValue, setFormattedValue] = useState<string>('')
@@ -137,9 +137,8 @@ const withSeparator = <P extends object>(Component: React.ComponentType<P> | 'in
 
   return (
     <Component
-      {...props as P}
+      {...otherProps as P}
       value={formattedValue}
-      placeholder={placeholder}
       onChange={handleChange}
       onBlur={handleBlur}
     />
