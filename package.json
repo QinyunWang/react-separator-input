@@ -3,6 +3,7 @@
   "name": "react-separator-input",
   "version": "1.0.0",
   "scripts": {
+    "prepare": "husky install",
     "start": "dumi dev",
     "docs:build": "dumi build",
     "docs:deploy": "gh-pages -d docs-dist",
