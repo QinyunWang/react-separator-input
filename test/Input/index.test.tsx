@@ -96,8 +96,42 @@ describe('Separator Input', () => {
       await user.keyboard('666')
       expect(element).toHaveValue('1,234.1')
 
-      await user.keyboard('{ArrowLeft}{ArrowLeft}{ArrowLeft}{ArrowLeft}.')
+      await user.keyboard('{ArrowLeft>4/}.')
       expect(element).toHaveValue('12.3')
+    })
+
+    it('should not able to delete thousand separator when press backspace', async () => {
+      render(<SeparatorInput thousandSeparator="," />)
+      const element = screen.getByRole('textbox')
+
+      await user.click(element)
+      await user.keyboard('1000{ArrowLeft>3/}{Backspace}')
+      expect(element).toHaveValue('1,000')
+    })
+
+    it('should not accept ahead decimal separator', async () => {
+      render(<SeparatorInput thousandSeparator="," />)
+      const element = screen.getByRole('textbox')
+
+      await user.click(element)
+      await user.keyboard('.123')
+      expect(element).toHaveValue('123')
+
+      await user.clear(element)
+      await user.keyboard('0.1')
+      expect(element).toHaveValue('0.1')
+    })
+
+    it('should only accept numeric and decimal separator input', async () => {
+      render(<SeparatorInput thousandSeparator="," />)
+      const element = screen.getByRole('textbox')
+
+      await user.click(element)
+      await user.keyboard('1000asd+-*&@#~`,_')
+      expect(element).toHaveValue('1,000')
+
+      await user.paste('abc666')
+      expect(element).toHaveValue('1,000,666')
     })
   })
 })
