@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { applyThousandSeparator, escapeVariable, isNil, noop, removeFormat, strip } from './utils'
-import { Separator, SeparatorInputProps } from './types'
+import { InputAttributes, Separator, SeparatorInputProps } from './types'
 
 const getCursorPosition = (
   formattedValue: string,
@@ -65,13 +65,18 @@ const format = (
   return result
 }
 
-const withSeparator = <P extends object>(Component: React.ComponentType<P> | 'input') =>
-  function SeparatorInput (props: P & SeparatorInputProps) {
+const withSeparator = <P extends object | unknown>(Component: React.ComponentType<P> | 'input') =>
+  function SeparatorInput (
+    props: (P extends object ? Omit<P, keyof SeparatorInputProps> : InputAttributes) &
+    SeparatorInputProps
+  ) {
     const {
       precision,
       decimalSeparator = '.',
       thousandSeparator = '',
       onValueChange = noop,
+      onChange = noop,
+      onBlur = noop,
       ...otherProps
     } = props
 
@@ -88,7 +93,7 @@ const withSeparator = <P extends object>(Component: React.ComponentType<P> | 'in
     useEffect(() => {
       const { formattedValue: newFormattedValue } = getValueGroup(props.value, 'change')
       setFormattedValue(newFormattedValue)
-    }, [props.value])
+    }, [props.value, thousandSeparator, decimalSeparator, precision])
 
     const validInputRegex = useMemo(() => {
       return new RegExp(`[0-9${escapeVariable(decimalSeparator)}]`)
@@ -145,15 +150,19 @@ const withSeparator = <P extends object>(Component: React.ComponentType<P> | 'in
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
       updateValue(event, 'change')
+
+      onChange(event)
     }
 
     const handleBlur = (event: React.FocusEvent<HTMLInputElement>): void => {
       updateValue(event, 'blur')
+
+      onBlur(event)
     }
 
     return (
       <Component
-        {...(otherProps as P)}
+        {...(otherProps as any)}
         value={formattedValue}
         onChange={handleChange}
         onBlur={handleBlur}

@@ -1,33 +1,40 @@
 # react-separator-input
 
-## Getting Started
+A number input component with automatically added separators.
 
-Install dependencies,
+## Feature
+
+1. Configurable thousand and decimal separator
+2. Support number precision
+3. HOC to support use with UI framework like antd and materialUI
+
+## Install
 
 ```bash
-$ npm i
+npm install react-separator-input --save
 ```
 
-Start the dev server,
+## Example
 
-```bash
-$ npm start
+//TODO: Url after deployed
+
+## Usage
+
+### HTML input component
+
+```tsx | pure
+import SeparatorInput from 'react-separator-input';
+
+React.render(<SeparatorInput thousandSeparator="," precision={2} />);
 ```
 
-Build documentation,
+### With UI libraries
 
-```bash
-$ npm run docs:build
-```
+```tsx | pure
+import { withSeparator } from 'react-separator-input';
+import { Input } from 'antd';
 
-Run test,
+const AntdInput = withSeparator(Input);
 
-```bash
-$ npm test
-```
-
-Build library via `father`,
-
-```bash
-$ npm run build
+React.render(<AntdInput thousandSeparator="," precision={2} />);
 ```
