@@ -2,6 +2,11 @@
 
 A number input component with automatically added separators.
 
+[![NPM version][npm-image]][npm-url]
+
+[npm-image]: http://img.shields.io/npm/v/react-separator-input.svg?style=flat-square&color=success
+[npm-url]: https://www.npmjs.com/package/react-separator-input
+
 ## Feature
 
 1. Configurable thousand and decimal separator
