@@ -1,7 +1,7 @@
 {
   "name": "react-separator-input",
   "description": "React input component and HOC with automatically added separator.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "Qinyun Wang",
   "license": "MIT",
   "repository": {
