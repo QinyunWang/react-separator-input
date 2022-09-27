@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom'
 import React from 'react'
 import { fireEvent, render, screen } from '@testing-library/react'
-import SeparatorInput from '../../src'
+import { SeparatorInput } from '../../src'
 import { UserEvent } from '@testing-library/user-event/setup/setup'
 import userEvent from '@testing-library/user-event'
 

@@ -4,16 +4,17 @@
     "module": "esnext",
     "moduleResolution": "node",
     "jsx": "react",
-    "esModuleInterop": true,
     "sourceMap": true,
-    "types": ["jest"],
-    "strict": true,
     "skipLibCheck": true,
     "declaration": true,
+    "esModuleInterop": true,
+    "downlevelIteration": true,
+    "noImplicitAny": true,
+    "strict": true,
     "outDir": "dist",
     "paths": {
-      "@/*": ["./src/*"],
-      "react-separator-input": ["./src/index.ts"]
+      "@/*": ["./src/*"]
     }
-  }
+  },
+  "include": ["src"]
 }

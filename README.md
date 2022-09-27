@@ -23,7 +23,7 @@ https://qinyunwang.github.io/react-separator-input/
 ### HTML input component
 
 ```tsx | pure
-import SeparatorInput from 'react-separator-input';
+import { SeparatorInput } from 'react-separator-input';
 
 React.render(<SeparatorInput thousandSeparator="," precision={2} />);
 ```

@@ -11,7 +11,7 @@ This is the value for the input field. It can be a float number or a formatted s
 
 ```tsx
 import React from 'react';
-import SeparatorInput from 'react-separator-input';
+import { SeparatorInput } from 'react-separator-input';
 
 const InputDemo: React.FC = () => {
   return (
@@ -32,7 +32,7 @@ export default InputDemo;
 
 ```tsx
 import React from 'react';
-import SeparatorInput from 'react-separator-input';
+import { SeparatorInput } from 'react-separator-input';
 
 const InputDemo: React.FC = () => {
   return (
@@ -59,7 +59,7 @@ export default InputDemo;
 
 ```tsx
 import React from 'react';
-import SeparatorInput from 'react-separator-input';
+import { SeparatorInput } from 'react-separator-input';
 
 const InputDemo: React.FC = () => {
   return (
@@ -85,7 +85,7 @@ export default InputDemo;
 
 ```tsx
 import React from 'react';
-import SeparatorInput from 'react-separator-input';
+import { SeparatorInput } from 'react-separator-input';
 
 const InputDemo: React.FC = () => {
   return (
@@ -111,7 +111,7 @@ export default InputDemo;
 
 ```tsx
 import React, { useState } from 'react';
-import SeparatorInput from 'react-separator-input';
+import { SeparatorInput } from 'react-separator-input';
 
 const InputDemo: React.FC = () => {
   const [value, setValue] = useState<{ formattedValue: string; numberValue: number }>({

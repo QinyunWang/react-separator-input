@@ -170,4 +170,6 @@ const withSeparator = <P extends object | unknown>(Component: React.ComponentTyp
     )
   }
 
-export default withSeparator
+const SeparatorInput = withSeparator('input')
+export default SeparatorInput
+export { withSeparator }
