@@ -14,9 +14,9 @@ A number input component with automatically added separators.
 npm install react-separator-input --save
 ```
 
-## Example
+## Docs
 
-//TODO: Url after deployed
+https://qinyunwang.github.io/react-separator-input/
 
 ## Usage
 

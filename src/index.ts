@@ -1,4 +1,6 @@
-import withSeparator from './Input'
-export { default as withSeparator } from './Input'
+import withSeparator from './separator-input'
 
-export default withSeparator('input')
+const SeparatorInput = withSeparator('input')
+
+export { withSeparator }
+export default SeparatorInput
