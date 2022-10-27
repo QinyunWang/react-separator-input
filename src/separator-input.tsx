@@ -55,13 +55,16 @@ const format = (
 
   let result = integerPart
 
-  if (stage === 'change') {
-    result += hasDecimalSeparator ? decimalSeparator + decimalPart : ''
-  }
-  if (stage === 'blur') {
-    result += decimalPart ? decimalSeparator + decimalPart : ''
-  }
+  const needDecimalPart = precision === undefined || precision > 0
 
+  if (needDecimalPart) {
+    if (stage === 'change') {
+      result += hasDecimalSeparator ? decimalSeparator + decimalPart : ''
+    }
+    if (stage === 'blur') {
+      result += decimalPart ? decimalSeparator + decimalPart : ''
+    }
+  }
   return result
 }
 
