@@ -50,6 +50,11 @@ describe('Separator Input', () => {
       render(<SeparatorInput value={1000.12} precision={1} />)
       expect(screen.getByRole('textbox')).toHaveValue('1000.1')
     })
+
+    it('should truncate the decimal value and decimal point when precision equals 0', () => {
+      render(<SeparatorInput value={1000.12} precision={0} />)
+      expect(screen.getByRole('textbox')).toHaveValue('1000')
+    })
   })
 
   describe('real time input convert', () => {
